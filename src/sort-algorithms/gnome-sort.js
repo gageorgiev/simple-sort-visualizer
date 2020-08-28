@@ -1,11 +1,11 @@
+import swap from './helpers/swap';
+
 function gnomeSortHelper(arr, upperBound, toAnimate) {
     var i = upperBound;
     while(i>0 && arr[i-1] > arr[i]) {
         var animation = {toCompareFirst: i, toCompareSecond: i-1, toSwap: true};
         toAnimate.push(animation);
-        const tmp = arr[i];
-        arr[i] = arr[i-1];
-        arr[i-1] = tmp;
+        swap(arr, i, i-1);
         i = i-1;
     }
 }

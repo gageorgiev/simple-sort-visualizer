@@ -6,7 +6,9 @@ import sortAlgMenu from './images/sortAlgMenu.svg';
 import bubbleSortAlg from './sort-algorithms/bubble-sort';
 import gnomeSortAlg from './sort-algorithms/gnome-sort';
 import quickSortAlg from './sort-algorithms/quick-sort';
+import mergeSortAlg from './sort-algorithms/merge-sort';
 import heapSortAlg from './sort-algorithms/heap-sort';
+import oddEvenSortAlg from './sort-algorithms/odd-even-sort';
 
 function randomArray(size) { //array of random numbers of size size
   var array = [];
@@ -84,6 +86,10 @@ function App() {
         animate(quickSortAlg(array));
       } else if(sortAlg==="Gnome sort") {
         animate(gnomeSortAlg(array));
+      } else if(sortAlg==="Odd-Even sort") {
+        animate(oddEvenSortAlg(array));
+      } else if(sortAlg==="Merge sort") {
+        animate(mergeSortAlg(array));
       }
     }
   }
@@ -111,8 +117,8 @@ function App() {
           {currSorting && "Sorting..."}
         </a>
         <div className="flex flex-row w-3/4 px-2 bg-blue-100 items-center justify-around shadow-lg rounded-full">
-          <div onMouseEnter={() => setHoveredSize(true)} onMouseLeave={() => setHoveredSize(false)} className="cursor-pointer ">
-            <div className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg select-none" >Size: {size}</div>
+          <div onMouseEnter={() => setHoveredSize(true)} onMouseLeave={() => setHoveredSize(false)} className="cursor-pointer">
+            <div className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded-lg select-none w-24 text-center " >Size: {size}</div>
               {hoveredSize && 
               <div className="flex absolute px-2 py-4 items-center bg-white rounded-lg">
                 <input
@@ -136,6 +142,7 @@ function App() {
                 <div onClick={() => {setSortAlg('Heap sort')}} className="hover:underline">Heap sort</div>
                 <div onClick={() => {setSortAlg('Quick sort')}} className="hover:underline">Quick sort</div>
                 <div onClick={() => {setSortAlg('Gnome sort')}} className="hover:underline">Gnome sort</div>
+                <div onClick={() => {setSortAlg('Odd-Even sort')}} className="hover:underline">Odd-Even sort</div>
               </div>}
           </div>
           <button onClick={() => handleSortPress()} className="flex flex-row bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" > 

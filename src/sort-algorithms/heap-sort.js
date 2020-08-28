@@ -1,3 +1,5 @@
+import swap from './helpers/swap';
+
 function heapify(array, size, i, toAnimate) {
     var largest = i;
     var left = 2*i + 1;
@@ -23,9 +25,7 @@ function heapify(array, size, i, toAnimate) {
     if(largest !== i) {
         animation.toSwap = true;
         toAnimate.push(animation);
-        let tmp = array[i];
-        array[i] = array[largest];
-        array[largest] = tmp;
+        swap(array, i, largest);
 
         heapify(array, size, largest, toAnimate);
     }
@@ -38,9 +38,7 @@ function heapSort(array, size, toAnimate) {
     for(let i=size-1;i>0;i--) {
         var animation = {toCompareFirst: 0, toCompareSecond: i, toSwap: true};
         toAnimate.push(animation);
-        let tmp = array[0];
-        array[0] = array[i];
-        array[i] = tmp;
+        swap(array, 0, i);
 
         heapify(array, i, 0, toAnimate);
     }
