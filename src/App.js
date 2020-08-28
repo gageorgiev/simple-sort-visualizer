@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import sortIcon from './images/sortIcon.svg';
 import sortAlgMenu from './images/sortAlgMenu.svg';
+import genNewArrIcon from './images/genNewArrIcon.svg';
 
 //import { bubbleSortAlg, gnomeSortAlg, quickSortAlg } from './sort-algorithms/sorting-algs'; 
 import bubbleSortAlg from './sort-algorithms/bubble-sort';
 import gnomeSortAlg from './sort-algorithms/gnome-sort';
 import quickSortAlg from './sort-algorithms/quick-sort';
-import mergeSortAlg from './sort-algorithms/merge-sort';
 import heapSortAlg from './sort-algorithms/heap-sort';
 import oddEvenSortAlg from './sort-algorithms/odd-even-sort';
 
@@ -25,7 +25,7 @@ function App() {
 
   const [size, setSize] = useState(50); //size of array
   const [array, setArray] = useState(randomArray(50)); //array that is to be sorted
-  const [sortSpeed, setSortSpeed] = useState(80);
+  const [sortSpeed, setSortSpeed] = useState(Math.floor(3000/size));
 
   const [currSorting, setCurrSorting] = useState(false); //flag to disable the button during sorting
   const [isSorted, setIsSorted] = useState(false);
@@ -88,8 +88,6 @@ function App() {
         animate(gnomeSortAlg(array));
       } else if(sortAlg==="Odd-Even sort") {
         animate(oddEvenSortAlg(array));
-      } else if(sortAlg==="Merge sort") {
-        animate(mergeSortAlg(array));
       }
     }
   }
@@ -104,12 +102,17 @@ function App() {
     setSize(sizeValue);
     setArray(randomArray(sizeValue));
 
-    setSortSpeed(Math.floor(4000/sizeValue));
+    setSortSpeed(Math.floor(3000/sizeValue));
+  }
+
+  const generateNewArray = () => {
+    setArray(randomArray(size));
+    setIsSorted(false);
   }
 
     return (
     <div className="h-screen w-screen items-center">
-      <div className="flex flex-row w-full justify-around select-none" style={{ height: '8%', backgroundColor: currSorting ? '#CCCCCC' : '#EEEEEE', pointerEvents: currSorting ? 'none' : 'all' }} >
+      <div className="flex flex-row w-full justify-around select-none" style={{ height: '8%', backgroundColor: currSorting ? '#CCCCCC' : '#FFFFFF', pointerEvents: currSorting ? 'none' : 'all' }} >
 
         <a href="/" className="w-12 font-bold text-xl self-center text-blue-500 hover:text-blue-700">
           {!isSorted && !currSorting && "Sorting vizualizer"}
@@ -124,7 +127,7 @@ function App() {
                 <input
                   type="range"
                   onChange={handleSliderChange}
-                  min={50}
+                  min={5}
                   max={250}
                   value={size}
                 />
@@ -162,22 +165,15 @@ function App() {
                       )
             }
         </div>
+        <div className="absolute left-0 bottom-0 pt-4 pr-4 rounded-t-lg" style={{ backgroundColor: currSorting ? '#CCCCCC' : '#FFFFFF', pointerEvents: currSorting ? 'none' : 'all' }}>
+          <button onClick={() => generateNewArray()} className="flex flex-row bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-4 mb-4 rounded-lg" > 
+            <img src={genNewArrIcon} alt="" />
+            <p className="ml-1 select-none">Generate New Array</p>
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
 export default App;
-
-
-
-/*
-<ReactSlider
-                  className="vertical-slider"
-                  orientation="vertical"
-                  onChange={value => sliderSize(value)}
-                  min={50}
-                  max={250}
-                  defaultValue={50}
-                  
-                />*/
