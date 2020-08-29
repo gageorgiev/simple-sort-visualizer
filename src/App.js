@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+//material-ui icons to make the buttons prettier
 import sortIcon from './images/sortIcon.svg';
 import sortAlgMenu from './images/sortAlgMenu.svg';
 import genNewArrIcon from './images/genNewArrIcon.svg';
@@ -13,7 +15,7 @@ import oddEvenSortAlg from './sort-algorithms/odd-even-sort';
 function randomArray(size) { //array of random numbers of size size
   var array = [];
   for(let i=0;i<size;i++) {
-    array.push(Math.floor(Math.random() * 300) + 10);
+    array.push(Math.floor(Math.random() * 3000) + 10);
   }
 
   return array;
@@ -27,12 +29,13 @@ function App() {
   const [array, setArray] = useState(randomArray(50)); //array that is to be sorted
   const [sortSpeed, setSortSpeed] = useState(Math.floor(5000/(size**1.2)));
 
-  const [currSorting, setCurrSorting] = useState(false); //flag to disable the button during sorting
-  const [isSorted, setIsSorted] = useState(false);
+  const [currSorting, setCurrSorting] = useState(false); //flag to disable the controls during sorting
+  const [isSorted, setIsSorted] = useState(false); //flag to disable sort button when the array is sorted
 
   const [hoveredSize, setHoveredSize] = useState(false); //true if dropdown menu for alg selection is hovered
   const [hoveredAlg, setHoveredAlg] = useState(false); //true if dropdown menu for alg selection is hovered
 
+  //colours for the bars
   const defaultBarColor = '#777777';
   const compareBarColor = '#fff82b';
   const correctBarColor = '#45ff54';
@@ -62,22 +65,22 @@ function App() {
           arrayBars[animations[i].toCompareSecond].style.backgroundColor = correctBarColor;
         }, (i+1)*sortSpeed);
       }
-      setTimeout(() => { 
-          if(arrayBars[animations[i].toCompareFirst].style.height === `${sortedArray[animations[i].toCompareFirst]/4}vh`) {
+      setTimeout(() => { //checks if the length of the bar matches the corresponding number in the sorted array and colours it the sorted colour if yes, the default colour if no 
+          if(arrayBars[animations[i].toCompareFirst].style.height === `${sortedArray[animations[i].toCompareFirst]/40}vh`) {
             arrayBars[animations[i].toCompareFirst].style.backgroundColor = sortedBarColor;
           } else {
             arrayBars[animations[i].toCompareFirst].style.backgroundColor = defaultBarColor;
           }
-          if(arrayBars[animations[i].toCompareSecond].style.height === `${sortedArray[animations[i].toCompareSecond]/4}vh`) {
+          if(arrayBars[animations[i].toCompareSecond].style.height === `${sortedArray[animations[i].toCompareSecond]/40}vh`) {
             arrayBars[animations[i].toCompareSecond].style.backgroundColor = sortedBarColor;
           } else {
             arrayBars[animations[i].toCompareSecond].style.backgroundColor = defaultBarColor;
           }
       }, (i+2)*sortSpeed);
-      setTimeout(() => {
+      setTimeout(() => { //sets all bars back to default colour at the end
           arrayBars[animations[i].toCompareFirst].style.backgroundColor = defaultBarColor;
           arrayBars[animations[i].toCompareSecond].style.backgroundColor = defaultBarColor;
-      }, animations.length*(sortSpeed)+500);
+      }, animations.length*(sortSpeed)+1000);
     }
     setTimeout(() => {
       setCurrSorting(false);
@@ -179,7 +182,7 @@ function App() {
       <div className="w-full bg-blue-200" style={{ height: '92%' }}>
         <div className="flex flex-row justify-evenly" >
             {array.map((number, index) => <div key={index} className="arrayBar" style={{
-                                            height: `${number/4}vh`,
+                                            height: `${number/40}vh`,
                                             width: `${1000/size}px`,
                                             backgroundColor: defaultBarColor,
                                           }}

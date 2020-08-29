@@ -30,7 +30,6 @@ function mergeSort(array, startIndex, endIndex, toAnimate) {
     } 
 }
 
-
 export default function mergeSortAlg(array) {
     var arr = array.slice()
     var toAnimate = [];
