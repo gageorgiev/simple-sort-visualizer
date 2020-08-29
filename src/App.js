@@ -36,10 +36,10 @@ function App() {
   const [hoveredAlg, setHoveredAlg] = useState(false); //true if dropdown menu for alg selection is hovered
 
   //colours for the bars
-  const defaultBarColor = '#777777';
-  const compareBarColor = '#fff82b';
-  const correctBarColor = '#45ff54';
-  const sortedBarColor = '#207000';
+  const defaultBarColor = '#555555';
+  const compareBarColor = '#f2301b';
+  const correctBarColor = '#aba500';
+  const sortedBarColor = '#a6ff96';
 
   //animation function that receives an array of animations by one of the funcs in sorting-algs.js and animates the bars based on it
   const animate = (animations, sortedArray) => {
@@ -136,7 +136,7 @@ function App() {
 
     return (
     <div className="h-screen w-screen items-center">
-      <div className="flex flex-row w-full justify-around select-none" style={{ height: '8%', backgroundColor: currSorting ? '#CCCCCC' : '#FFFFFF', pointerEvents: currSorting ? 'none' : 'all' }} >
+      <div className="flex flex-row w-full justify-around select-none" style={{ height: '8%', backgroundColor: currSorting ? '#CCCCCC' : '#EEEEEE', pointerEvents: currSorting ? 'none' : 'all' }} >
 
         <a href="/simple-sort-visualizer" className="w-48 font-bold text-xl self-center text-blue-500 hover:text-blue-700">
           {!isSorted && !currSorting && "Sorting vizualizer"}
@@ -179,7 +179,7 @@ function App() {
           </button>
         </div>
       </div>
-      <div className="w-full bg-blue-200" style={{ height: '92%' }}>
+      <div className="w-full bg-white" style={{ height: '92%' }}>
         <div className="flex flex-row justify-evenly" >
             {array.map((number, index) => <div key={index} className="arrayBar" style={{
                                             height: `${number/40}vh`,
@@ -190,7 +190,7 @@ function App() {
                       )
             }
         </div>
-        <div className="absolute left-0 bottom-0 pt-4 pr-4 rounded-t-lg" style={{ backgroundColor: currSorting ? '#CCCCCC' : '#FFFFFF', pointerEvents: currSorting ? 'none' : 'all' }}>
+        <div className="absolute left-0 bottom-0 pt-4 pr-4 rounded-t-lg" style={{ backgroundColor: currSorting ? '#CCCCCC' : '#EEEEEE', pointerEvents: currSorting ? 'none' : 'all' }}>
           <button onClick={() => generateNewArray()} className="flex flex-row bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-4 mb-4 rounded-lg" > 
             <img src={genNewArrIcon} alt="" />
             <p className="ml-1 select-none">Generate New Array</p>
