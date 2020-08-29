@@ -50,5 +50,5 @@ export default function heapSortAlg(array) {
     var arr = array.slice();
     var toAnimate = [];
     heapSort(arr, arr.length, toAnimate);
-    return toAnimate;
+    return {toAnimate: toAnimate, arr: arr};
 }

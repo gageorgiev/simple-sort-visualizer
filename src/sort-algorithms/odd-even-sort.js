@@ -28,5 +28,5 @@ export default function oddEvenSortAlg(array) {
     var arr = array.slice();
     var toAnimate = [];
     oddEvenSort(arr, toAnimate);
-    return toAnimate;
+    return {toAnimate: toAnimate, arr: arr};
 }

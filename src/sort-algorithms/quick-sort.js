@@ -49,5 +49,5 @@ export default function quickSortAlg(array) {
     var arr = array.slice();
     var toAnimate = [];
     quickSortMain(arr, 0, arr.length-1, toAnimate);
-    return toAnimate;
+    return {toAnimate: toAnimate, arr: arr};
 }

@@ -3,10 +3,10 @@ import sortIcon from './images/sortIcon.svg';
 import sortAlgMenu from './images/sortAlgMenu.svg';
 import genNewArrIcon from './images/genNewArrIcon.svg';
 
-//import { bubbleSortAlg, gnomeSortAlg, quickSortAlg } from './sort-algorithms/sorting-algs'; 
 import bubbleSortAlg from './sort-algorithms/bubble-sort';
 import gnomeSortAlg from './sort-algorithms/gnome-sort';
 import quickSortAlg from './sort-algorithms/quick-sort';
+import mergeSortAlg from './sort-algorithms/merge-sort';
 import heapSortAlg from './sort-algorithms/heap-sort';
 import oddEvenSortAlg from './sort-algorithms/odd-even-sort';
 
@@ -25,7 +25,7 @@ function App() {
 
   const [size, setSize] = useState(50); //size of array
   const [array, setArray] = useState(randomArray(50)); //array that is to be sorted
-  const [sortSpeed, setSortSpeed] = useState(Math.floor(3000/size));
+  const [sortSpeed, setSortSpeed] = useState(Math.floor(5000/(size**1.2)));
 
   const [currSorting, setCurrSorting] = useState(false); //flag to disable the button during sorting
   const [isSorted, setIsSorted] = useState(false);
@@ -36,9 +36,10 @@ function App() {
   const defaultBarColor = '#777777';
   const compareBarColor = '#fff82b';
   const correctBarColor = '#45ff54';
+  const sortedBarColor = '#207000';
 
   //animation function that receives an array of animations by one of the funcs in sorting-algs.js and animates the bars based on it
-  const animate = (animations) => {
+  const animate = (animations, sortedArray) => {
     const arrayBars = document.getElementsByClassName('arrayBar'); //get elements to change css for animations
     for(let i=0;i<animations.length;i++) {
       setTimeout(() => { //set them to red at start of comparison
@@ -61,10 +62,22 @@ function App() {
           arrayBars[animations[i].toCompareSecond].style.backgroundColor = correctBarColor;
         }, (i+1)*sortSpeed);
       }
-      setTimeout(() => { //set them back to yellow
+      setTimeout(() => { 
+          if(arrayBars[animations[i].toCompareFirst].style.height === `${sortedArray[animations[i].toCompareFirst]/4}vh`) {
+            arrayBars[animations[i].toCompareFirst].style.backgroundColor = sortedBarColor;
+          } else {
+            arrayBars[animations[i].toCompareFirst].style.backgroundColor = defaultBarColor;
+          }
+          if(arrayBars[animations[i].toCompareSecond].style.height === `${sortedArray[animations[i].toCompareSecond]/4}vh`) {
+            arrayBars[animations[i].toCompareSecond].style.backgroundColor = sortedBarColor;
+          } else {
+            arrayBars[animations[i].toCompareSecond].style.backgroundColor = defaultBarColor;
+          }
+      }, (i+2)*sortSpeed);
+      setTimeout(() => {
           arrayBars[animations[i].toCompareFirst].style.backgroundColor = defaultBarColor;
           arrayBars[animations[i].toCompareSecond].style.backgroundColor = defaultBarColor;
-      }, (i+2)*sortSpeed);
+      }, animations.length*(sortSpeed)+500);
     }
     setTimeout(() => {
       setCurrSorting(false);
@@ -79,54 +92,62 @@ function App() {
     else {
       setCurrSorting(true);
       if(sortAlg==="Bubble sort") {
-        animate(bubbleSortAlg(array));
+        let result = bubbleSortAlg(array);
+        animate(result.toAnimate, result.arr);
       } else if(sortAlg==="Heap sort") {
-        animate(heapSortAlg(array));
+        let result = heapSortAlg(array);
+        animate(result.toAnimate, result.arr);
       } else if(sortAlg==="Quick sort") {
-        animate(quickSortAlg(array));
+        let result = quickSortAlg(array);
+        animate(result.toAnimate, result.arr);
       } else if(sortAlg==="Gnome sort") {
-        animate(gnomeSortAlg(array));
+        let result = gnomeSortAlg(array);
+        animate(result.toAnimate, result.arr);
       } else if(sortAlg==="Odd-Even sort") {
-        animate(oddEvenSortAlg(array));
+        let result = oddEvenSortAlg(array);
+        animate(result.toAnimate, result.arr);
+      } else if(sortAlg==="Merge sort") {
+        let result = mergeSortAlg(array);
+        animate(result.toAnimate, result.arr);
       }
     }
   }
 
-  const handleSliderChange = (event) => {
-    sliderSize(event.target.value);
-  }
+  const sliderSize = (event) => {
+    let sizeValue = event.target.value;
 
-  const sliderSize = (sizeValue) => {
     setIsSorted(false);
 
     setSize(sizeValue);
     setArray(randomArray(sizeValue));
 
-    setSortSpeed(Math.floor(3000/sizeValue));
+    setSortSpeed(Math.floor(5000/(sizeValue**1.2)));
   }
 
   const generateNewArray = () => {
-    setArray(randomArray(size));
     setIsSorted(false);
+
+    setSize(size);
+    setArray(randomArray(size));
   }
 
     return (
     <div className="h-screen w-screen items-center">
       <div className="flex flex-row w-full justify-around select-none" style={{ height: '8%', backgroundColor: currSorting ? '#CCCCCC' : '#FFFFFF', pointerEvents: currSorting ? 'none' : 'all' }} >
 
-        <a href="/" className="w-12 font-bold text-xl self-center text-blue-500 hover:text-blue-700">
+        <a href="/simple-sort-visualizer" className="w-48 font-bold text-xl self-center text-blue-500 hover:text-blue-700">
           {!isSorted && !currSorting && "Sorting vizualizer"}
           {isSorted && "Sorted"}
           {currSorting && "Sorting..."}
         </a>
-        <div className="flex flex-row w-3/4 px-2 bg-blue-100 items-center justify-around shadow-lg rounded-full">
+        <div className="flex flex-row w-3/4 h-12 px-2 bg-blue-100 self-center items-center justify-around shadow-lg rounded-full">
           <div onMouseEnter={() => setHoveredSize(true)} onMouseLeave={() => setHoveredSize(false)} className="cursor-pointer">
-            <div className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded-lg select-none w-24 text-center " >Size: {size}</div>
+            <div className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 rounded-lg select-none w-24 text-center" >Size: {size}</div>
               {hoveredSize && 
               <div className="flex absolute px-2 py-4 items-center bg-white rounded-lg">
                 <input
                   type="range"
-                  onChange={handleSliderChange}
+                  onChange={sliderSize}
                   min={5}
                   max={250}
                   value={size}
@@ -134,21 +155,22 @@ function App() {
               </div>
               }
           </div>
-          <div onMouseEnter={() => setHoveredAlg(true)} onMouseLeave={() => setHoveredAlg(false)} className="py-2 px-4 rounded-lg bg-blue-500 hover:bg-blue-700 font-bold text-white cursor-pointer">
+          <div onMouseEnter={() => setHoveredAlg(true)} onMouseLeave={() => setHoveredAlg(false)} className="py-1 px-4 rounded-lg bg-blue-500 hover:bg-blue-700 font-bold text-white cursor-pointer">
             <div className="flex flex-row">
               <img src={sortAlgMenu} alt="" />
               <p className="ml-1">{sortAlg}</p>
             </div>
             {hoveredAlg &&
-              <div className="absolute flex flex-col text-black bg-white cursor-pointer py-2 px-4 mt-2 rounded-lg" onClick={() => {setHoveredAlg(false)}}>
+              <div className="absolute flex flex-col text-black bg-white cursor-pointer py-2 px-2 mt-1 rounded-lg" onClick={() => {setHoveredAlg(false)}}>
                 <div onClick={() => {setSortAlg('Bubble sort')}} className="hover:underline">Bubble sort</div>
                 <div onClick={() => {setSortAlg('Heap sort')}} className="hover:underline">Heap sort</div>
+                <div onClick={() => {setSortAlg('Merge sort')}} className="hover:underline">Merge sort</div>
                 <div onClick={() => {setSortAlg('Quick sort')}} className="hover:underline">Quick sort</div>
                 <div onClick={() => {setSortAlg('Gnome sort')}} className="hover:underline">Gnome sort</div>
                 <div onClick={() => {setSortAlg('Odd-Even sort')}} className="hover:underline">Odd-Even sort</div>
               </div>}
           </div>
-          <button onClick={() => handleSortPress()} className="flex flex-row bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" > 
+          <button onClick={() => handleSortPress()} className="flex flex-row bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded-lg" > 
             <img src={sortIcon} alt="" />
             <p className="ml-1 select-none">Sort</p>
           </button>

@@ -14,5 +14,5 @@ export default function bubbleSortAlg(array) {
         }
     }
 
-    return toAnimate;
+    return {toAnimate: toAnimate, arr: arr};
 };

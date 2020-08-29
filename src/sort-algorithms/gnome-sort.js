@@ -16,7 +16,7 @@ export default function gnomeSortAlg(array) {
     for(let i=1;i<arr.length;i++) {
         gnomeSortHelper(arr, i, toAnimate);
     }
-    return toAnimate;
+    return {toAnimate: toAnimate, arr: arr};
 }
 
 //old gnome sort(unoptimized)
