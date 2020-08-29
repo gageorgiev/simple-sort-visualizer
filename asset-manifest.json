@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/simple-sort-visualizer/static/css/main.edf29e5b.chunk.css",
-    "main.js": "/simple-sort-visualizer/static/js/main.e96a20b3.chunk.js",
-    "main.js.map": "/simple-sort-visualizer/static/js/main.e96a20b3.chunk.js.map",
-    "runtime-main.js": "/simple-sort-visualizer/static/js/runtime-main.8ba21297.js",
-    "runtime-main.js.map": "/simple-sort-visualizer/static/js/runtime-main.8ba21297.js.map",
-    "static/js/2.637f169e.chunk.js": "/simple-sort-visualizer/static/js/2.637f169e.chunk.js",
-    "static/js/2.637f169e.chunk.js.map": "/simple-sort-visualizer/static/js/2.637f169e.chunk.js.map",
+    "main.js": "/simple-sort-visualizer/static/js/main.a60d9fd3.chunk.js",
+    "main.js.map": "/simple-sort-visualizer/static/js/main.a60d9fd3.chunk.js.map",
+    "runtime-main.js": "/simple-sort-visualizer/static/js/runtime-main.6cd0e988.js",
+    "runtime-main.js.map": "/simple-sort-visualizer/static/js/runtime-main.6cd0e988.js.map",
+    "static/js/2.cbaaa6bd.chunk.js": "/simple-sort-visualizer/static/js/2.cbaaa6bd.chunk.js",
+    "static/js/2.cbaaa6bd.chunk.js.map": "/simple-sort-visualizer/static/js/2.cbaaa6bd.chunk.js.map",
     "index.html": "/simple-sort-visualizer/index.html",
-    "precache-manifest.c8495d86c55e6d771b73c17bb6d7dd26.js": "/simple-sort-visualizer/precache-manifest.c8495d86c55e6d771b73c17bb6d7dd26.js",
+    "precache-manifest.fcace21912a77fd69958aa84c8fee74b.js": "/simple-sort-visualizer/precache-manifest.fcace21912a77fd69958aa84c8fee74b.js",
     "service-worker.js": "/simple-sort-visualizer/service-worker.js",
     "static/css/main.edf29e5b.chunk.css.map": "/simple-sort-visualizer/static/css/main.edf29e5b.chunk.css.map",
-    "static/js/2.637f169e.chunk.js.LICENSE.txt": "/simple-sort-visualizer/static/js/2.637f169e.chunk.js.LICENSE.txt",
+    "static/js/2.cbaaa6bd.chunk.js.LICENSE.txt": "/simple-sort-visualizer/static/js/2.cbaaa6bd.chunk.js.LICENSE.txt",
     "static/media/genNewArrIcon.svg": "/simple-sort-visualizer/static/media/genNewArrIcon.8797e476.svg",
     "static/media/sortAlgMenu.svg": "/simple-sort-visualizer/static/media/sortAlgMenu.873ca344.svg",
     "static/media/sortIcon.svg": "/simple-sort-visualizer/static/media/sortIcon.fc574009.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.8ba21297.js",
-    "static/js/2.637f169e.chunk.js",
+    "static/js/runtime-main.6cd0e988.js",
+    "static/js/2.cbaaa6bd.chunk.js",
     "static/css/main.edf29e5b.chunk.css",
-    "static/js/main.e96a20b3.chunk.js"
+    "static/js/main.a60d9fd3.chunk.js"
   ]
 }
